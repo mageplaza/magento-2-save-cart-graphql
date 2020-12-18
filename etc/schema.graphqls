@@ -1,0 +1,111 @@
+type Query {
+    mpSaveCartConfigs:MpSaveCartConfigsOutput @doc(description: "Save Cart Config") @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Query\\Configs")
+    mpSaveCartGetCarts(
+        filter: MpCartsFilterInput @doc(description: "Identifies which carts to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ):MpGetCartsOutput @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Query\\GetCarts") @doc(description: "The query searches for carts that match the criteria specified in the filter.")
+    mpSaveCartGetProducts(
+        filter: MpProductsFilterInput @doc(description: "Identifies which products to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ):MpGetProductsOutput @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Query\\GetProducts") @doc(description: "The query searches for products that match the criteria specified in the filter.")
+    mpSaveCartViewCarts(token: String!):MpCartsOutput @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Query\\ViewCarts") @doc(description: "Searches for an cart that matches the token.")
+}
+
+type Mutation {
+    mpSaveCartDeleteProduct(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\DeleteProduct") @doc(description: "Delete Product")
+    mpSaveCartRestoreProduct(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\RestoreProduct") @doc(description: "Restore Product")
+    mpSaveCartShareProduct(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\ShareProduct") @doc(description: "Share Product")
+    mpSaveCartSaveItem(
+        cart_id: Int! @doc(description: "Cart Id")
+        item_id: Int! @doc(description: "Item Id")
+    ): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\SaveItem") @doc(description: "Save Item")
+    mpSaveCartDeleteCart(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\DeleteCart") @doc(description: "Delete Cart")
+    mpSaveCartRestoreCart(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\RestoreCart") @doc(description: "Restore Cart")
+    mpSaveCartShareCart(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\ShareCart") @doc(description: "Share Cart")
+    mpSaveCart(
+        cart_id: Int! @doc(description: "Cart Id")
+        cart_name: String! @doc(description: "Cart Name")
+        description: String @doc(description: "Description")
+    ): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\SaveCart") @doc(description: "Save Cart")
+}
+
+type MpSaveCartConfigsOutput {
+    enabled: Int @doc(description: "Enabled")
+    button_title: String @doc(description: "Button Title")
+    show_button_guest: Int @doc(description: "Show Button Guest")
+    page_link_area: String @doc(description: "Page Link Area")
+    allow_share: Int @doc(description: "Allow Share")
+    icon: String @doc(description: "Icon")
+    icon_url: String @doc(description: "Icon Url")
+}
+
+input MpCartsFilterInput {
+    cart_id: FilterTypeInput @doc(description: "Cart Id")
+    cart_name: FilterTypeInput @doc(description: "Cart Name")
+    description: FilterTypeInput @doc(description: "Description")
+    customer_id: FilterTypeInput @doc(description: "Customer Id")
+    store_id: FilterTypeInput @doc(description: "Store Id")
+    created_at: FilterTypeInput @doc(description: "Created At")
+    updated_at: FilterTypeInput @doc(description: "Updated At")
+}
+
+input MpProductsFilterInput {
+    id: FilterTypeInput @doc(description: "Id")
+    customer_id: FilterTypeInput @doc(description: "Customer Id")
+    store_id: FilterTypeInput @doc(description: "Store Id")
+    product_id: FilterTypeInput @doc(description: "Product Id")
+    qty: FilterTypeInput @doc(description: "Qty")
+    created_at: FilterTypeInput @doc(description: "Created At")
+    updated_at: FilterTypeInput @doc(description: "Updated At")
+}
+
+type MpGetCartsOutput {
+    total_count: Int @doc(description: "The total number of results returned when a query is applied"),
+    items: [MpCartsOutput] @doc(description: "Cart Items")
+}
+
+type MpGetProductsOutput {
+    total_count: Int @doc(description: "The total number of results returned when a query is applied"),
+    items: [MpProductsOutput] @doc(description: "Product Items")
+}
+
+type MpCartsOutput {
+    cart_id: Int @doc(description: "Cart Id")
+    store_id: String @doc(description: "Store Id")
+    created_at: String @doc(description: "Created At")
+    cart_name: String @doc(description: "Cart Name")
+    customer_id: String @doc(description: "Customer Id")
+    share_url: String @doc(description: "Share Url")
+    token: String @doc(description: "Token")
+    items: [CartItemsOutput] @doc(description: "Items in Cart")
+}
+
+type MpProductsOutput {
+    id: Int @doc(description: "Id")
+    store_id: Int @doc(description: "Store Id")
+    price: String @doc(description: "Price")
+    subtotal_converted: String @doc(description: "Subtotal Converted")
+    image_url: String @doc(description: "Image Url")
+    product_id: Int @doc(description: "Product Id")
+    product_name: String @doc(description: "Product Name")
+    token: String @doc(description: "Token")
+    customer_id: Int @doc(description: "Customer Id")
+    share_url: String @doc(description: "Share Url")
+    created_at: String @doc(description: "Created At")
+}
+
+type CartItemsOutput {
+    cart_item_id: Int @doc(description: "Cart Item Id")
+    product_id: String @doc(description: "Product Id")
+    product_name: String @doc(description: "Product Name")
+    qty: Int @doc(description: "Qty")
+    cart_id: String @doc(description: "Cart Id")
+    store_id: Int @doc(description: "Store Id")
+    created_at: String @doc(description: "Created At")
+    price: String @doc(description: "Price")
+    image: String @doc(description: "Image")
+    sku: String @doc(description: "Sku")
+    subtotal_converted: String @doc(description: "Subtotal converted")
+}
