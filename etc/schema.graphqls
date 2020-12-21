@@ -15,15 +15,27 @@ type Query {
 
 type Mutation {
     mpSaveCartDeleteProduct(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\DeleteProduct") @doc(description: "Delete Product")
-    mpSaveCartRestoreProduct(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\RestoreProduct") @doc(description: "Restore Product")
-    mpSaveCartShareProduct(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\ShareProduct") @doc(description: "Share Product")
+    mpSaveCartRestoreProduct(
+        cart_id: String! @doc(description: "Cart Id")
+        token: String! @doc(description: "Token")
+    ): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\RestoreProduct") @doc(description: "Restore Product")
+    mpSaveCartShareProduct(
+        cart_id: String! @doc(description: "Cart Id")
+        token: String! @doc(description: "Token")
+    ): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\ShareProduct") @doc(description: "Share Product")
     mpSaveCartSaveItem(
         cart_id: Int! @doc(description: "Cart Id")
         item_id: Int! @doc(description: "Item Id")
     ): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\SaveItem") @doc(description: "Save Item")
     mpSaveCartDeleteCart(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\DeleteCart") @doc(description: "Delete Cart")
-    mpSaveCartRestoreCart(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\RestoreCart") @doc(description: "Restore Cart")
-    mpSaveCartShareCart(token: String! @doc(description: "Token")): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\ShareCart") @doc(description: "Share Cart")
+    mpSaveCartRestoreCart(
+        cart_id: String! @doc(description: "Cart Id")
+        token: String! @doc(description: "Token")
+    ): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\RestoreCart") @doc(description: "Restore Cart")
+    mpSaveCartShareCart(
+        cart_id: String! @doc(description: "Cart Id")
+        token: String! @doc(description: "Token")
+    ): Boolean  @resolver(class: "Mageplaza\\SaveCartGraphQl\\Model\\Resolver\\Mutation\\ShareCart") @doc(description: "Share Cart")
     mpSaveCart(
         cart_id: Int! @doc(description: "Cart Id")
         cart_name: String! @doc(description: "Cart Name")

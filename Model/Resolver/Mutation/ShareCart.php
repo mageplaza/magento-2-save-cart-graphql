@@ -65,7 +65,10 @@ class ShareCart extends AbstractSaveCart
         if (!isset($args['token'])) {
             throw new GraphQlInputException(__('"token" value should be specified'));
         }
+        if (!isset($args['cart_id'])) {
+            throw new GraphQlInputException(__('"cart_id" value should be specified'));
+        }
 
-        return $this->saveCartRepository->share($args['token']);
+        return $this->saveCartRepository->shareGuest($args['cart_id'], $args['token']);
     }
 }

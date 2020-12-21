@@ -25,6 +25,7 @@ namespace Mageplaza\SaveCartGraphQl\Model\Resolver\Mutation;
 
 use Magento\CustomerGraphQl\Model\Customer\GetCustomer;
 use Magento\Framework\GraphQl\Config\Element\Field;
+use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\SaveCart\Helper\Data;
 use Mageplaza\SaveCartGraphQl\Model\Resolver\AbstractSaveCartTokenCustomer;
@@ -64,8 +65,11 @@ class RestoreCart extends AbstractSaveCartTokenCustomer
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         parent::resolve($field, $context, $info, $value, $args);
+        if (!isset($args['cart_id'])) {
+            throw new GraphQlInputException(__('"cart_id" value should be specified'));
+        }
         $customer = $this->getCustomer->execute($context);
 
-        return $this->saveCartRepository->restore((int)$customer->getId(), $args['token']);
+        return $this->saveCartRepository->restore((int)$customer->getId(), $args['cart_id'], $args['token']);
     }
 }
