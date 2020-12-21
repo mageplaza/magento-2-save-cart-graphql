@@ -24,8 +24,12 @@ declare(strict_types=1);
 namespace Mageplaza\SaveCartGraphQl\Model\Resolver\Mutation;
 
 use Magento\CustomerGraphQl\Model\Customer\GetCustomer;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\GraphQl\Config\Element\Field;
+use Magento\Framework\GraphQl\Exception\GraphQlAlreadyExistsException;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
+use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\SaveCart\Helper\Data;
 use Mageplaza\SaveCartGraphQl\Model\Resolver\AbstractSaveCartCustomer;
@@ -74,6 +78,12 @@ class SaveCart extends AbstractSaveCartCustomer
         }
         $customer = $this->getCustomer->execute($context);
 
-        return $this->saveCartRepository->save((int)$customer->getId(), $args['cart_id'], $args['cart_name']);
+        try {
+            return $this->saveCartRepository->save((int)$customer->getId(), $args['cart_id'], $args['cart_name']);
+        } catch (NoSuchEntityException $e) {
+            throw new GraphQlNoSuchEntityException(__($e->getMessage()));
+        } catch (LocalizedException $e) {
+            throw new GraphQlAlreadyExistsException(__($e->getMessage()));
+        }
     }
 }
