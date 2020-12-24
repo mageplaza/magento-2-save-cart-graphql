@@ -1,6 +1,6 @@
-# Magento 2 Save Cart GraphQL/PWA
+# Magento 2 Save Cart GraphQL
 
-Magento 2 Save Cart GraphQL is a part of Save Cart extension that add GraphQL features, this support for PWA Studio.
+Magento Save Cart GraphQL is a part of Save Cart extension that add GraphQL features, this support for PWA Studio.
 ## 1. How to install
 
 Run the following command in Magento 2 root folder:
@@ -12,7 +12,7 @@ php bin/magento setup:static-content:deploy
 ```
 
 **Note:**
-Magento 2 Save Cart GraphQL requires installing [Mageplaza Save Cart](https://www.mageplaza.com/magento-2-save-cart/) in your Magento installation.
+Save Cart GraphQL requires installing [Mageplaza Save Cart](https://www.mageplaza.com/magento-2-save-cart/) in your Magento installation.
 
 ## 2. How to use
 
