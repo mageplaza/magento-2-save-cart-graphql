@@ -37,8 +37,8 @@ To perform GraphQL queries in Magento, please do the following requirements:
 
 ## 3. Devdocs
 
-- [Save Cart API & examples](https://documenter.getpostman.com/view/10589000/T1DiEfN8?version=latest)
-- [Save Cart GraphQL & examples](https://documenter.getpostman.com/view/10589000/TVsuC7mq)
+- [Magento 2 Save Cart API & examples](https://documenter.getpostman.com/view/10589000/T1DiEfN8?version=latest)
+- [Magento 2 Save Cart GraphQL & examples](https://documenter.getpostman.com/view/10589000/TVsuC7mq)
 
 
 ## 4. Contribute to this module
