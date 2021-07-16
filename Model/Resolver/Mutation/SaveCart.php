@@ -79,7 +79,7 @@ class SaveCart extends AbstractSaveCartCustomer
         $customer = $this->getCustomer->execute($context);
 
         try {
-            return $this->saveCartRepository->save((int)$customer->getId(), $args['cart_id'], $args['cart_name']);
+            return $this->saveCartRepository->save((int)$customer->getId(), $args['cart_id'], $args['cart_name'], $args['description'] ?? '');
         } catch (NoSuchEntityException $e) {
             throw new GraphQlNoSuchEntityException(__($e->getMessage()));
         } catch (LocalizedException $e) {
