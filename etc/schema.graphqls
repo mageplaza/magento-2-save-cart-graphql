@@ -88,6 +88,7 @@ type MpCartsOutput {
     store_id: String @doc(description: "Store Id")
     created_at: String @doc(description: "Created At")
     cart_name: String @doc(description: "Cart Name")
+    description: String @doc(description: "Description")
     customer_id: String @doc(description: "Customer Id")
     share_url: String @doc(description: "Share Url")
     token: String @doc(description: "Token")
